@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>node-爬虫-demo</title>
+    <style>
+        .content{
+            width: 90%;
+            margin: auto;
+        }
+        .links a{
+            height: 30px;
+            line-height: 30px;
+            font-size: 13px;
+            color: #000;
+            text-decoration: none;
+        }
+        .links a:hover{
+            color: #009A61;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>豆瓣租房信息</h2>
+        <div class="links"></div>
+        <div>
+            <button class="prev" onclick=compute(-1)>上一页</button>
+            <button class="next" onclick=compute(1)>下一页</button>
+        </div>
+    </div>
+
+    <script src="jquery-3.3.1.js"></script>
+    <script>
+        var page = 0;
+        function compute(state){
+            if(state == 1){
+                page++
+            }else{
+                if(page <= 0){
+                    return false;
+                }
+                page -- 
+            }
+            console.log(page)
+            render(page)
+        }
+        render()
+        function render(page){
+            $.ajax({
+                url:'http://192.168.101.7:3000/page',
+                type:'POST',
+                data:{
+                    page:page
+                },
+                success:function(data){
+                    $(".links").empty();
+                    var framgment = document.createDocumentFragment();
+                    for(let key in data.data){
+                        let div = document.createElement("div")
+                        let a = document.createElement("a")
+                         a.href = data.data[key].href;
+                         a.innerHTML = data.data[key].title;
+                         div.append(a)
+                         framgment.append(div)
+                    }
+                    document.querySelector(".links").append(framgment)
+                }
+            })
+        }
+
+        $.ajax({
+            url:'http://192.168.101.7:3000/text',
+            type:'GET',
+            data:{
+                id:6
+            },
+            success:function(data){
+                console.log(data)
+            }
+        })
+       
+    </script>
+</body>
+</html>

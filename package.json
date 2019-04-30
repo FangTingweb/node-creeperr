@@ -1,0 +1,19 @@
+{
+  "name": "creeperr",
+  "version": "1.0.0",
+  "description": "node-cerrperr",
+  "main": "creeperr.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "fs": "0.0.1-security",
+    "multer": "^1.4.1",
+    "node-xlsx": "^0.14.1",
+    "request": "^2.88.0"
+  }
+}
