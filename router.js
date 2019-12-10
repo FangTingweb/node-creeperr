@@ -24,6 +24,5 @@ router.get('/text', function(req, res, next) {
     console.log(req.query)
     res.send("hi:Get")
 });
-
-  module.exports = router
   console.log("1111111111")
+  module.exports = router
